@@ -9,6 +9,7 @@ private const val TAG = "QuizViewModel"
 class QuizViewModel : ViewModel() {
 
     var currentIndex = 0 // Start counting at zero
+    var isCheater = false
 
     private val questionBank = listOf( // List is created to hold questions
         Question(R.string.question_australia, true),
