@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var questionTextView: TextView
 
     private val quizViewModel: QuizViewModel by lazy {
-        ViewModelProviders.of(this).get(QuizViewModel::class.java)
+       ViewModelProviders.of(this).get(QuizViewModel::class.java)
     }
 
     @SuppressLint("RestrictedApi")
@@ -74,7 +74,7 @@ class MainActivity : AppCompatActivity() {
             //Start CheatActivity
             val answerIsTrue = quizViewModel.currentQuestionAnswer
             val intent = CheatActivity.newIntent(this@MainActivity, answerIsTrue)
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (SDK_INT >= Build.VERSION_CODES.M) {
                 val options = ActivityOptions.makeClipRevealAnimation(view, 0,0, view.width, view.height)
                 startActivityForResult(intent, REQUEST_CODE_CHEAT, options.toBundle())
             } else {
@@ -133,15 +133,14 @@ class MainActivity : AppCompatActivity() {
         Toast.makeText(this, messageResId, Toast.LENGTH_SHORT).show()
     }
 
-    override fun onActivityReslult(requestCode: Int,
+    override fun onActivityResult(requestCode: Int,
                                    resultCode: Int,
-                                   data: Intent?) {  //page 130
+                                   data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if(requestCode != Activity.RESULT_OK) {
+        if(requestCode != RESULT_OK) {
             return
         }
-
         if(requestCode == REQUEST_CODE_CHEAT) {
             quizViewModel.isCheater =
                 data?.getBooleanExtra(EXTRA_ANSWER_SHOWN,false) ?: false
